@@ -1,20 +1,35 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { Text, Button, SafeAreaView, StatusBar } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+interface ContadorProps {
+  titulo: string;
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const Contador: React.FC<ContadorProps> = ({ titulo }) => {
+  const [contador, setContador] = useState(0);
+
+  const incrementar = () => {
+    setContador(contador + 1);
+  };
+
+  const decrementar = () => {
+    setContador(contador - 1);
+  };
+
+  const resetar = () => {
+    setContador(0);
+  };
+
+  return (
+    <SafeAreaView style={{justifyContent:'center', alignItems:'center', flex:1}}>
+      <Text>{titulo}</Text>
+      <Text>Contador: {contador}</Text>
+      <Button title="Incrementar" onPress={incrementar} />
+      <Button title="Decrementar" onPress={decrementar} />
+      <Button title="Resetar" onPress={resetar} />
+    </SafeAreaView>
+      
+  );
+};
+
+export default Contador;
